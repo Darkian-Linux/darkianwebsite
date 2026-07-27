@@ -76,7 +76,7 @@
 
         .nav-logo img { height: 24px; width: 24px; object-fit: contain; border-radius: 4px; }
 
-        .nav-links { display: none; list-style: none; }
+        .nav-links { display: flex; gap: 0.125rem; list-style: none; }
 
         .nav-links a {
             display: inline-flex; align-items: center; gap: 0.3rem;
@@ -144,22 +144,9 @@
         .theme-dropdown button.active .check { opacity: 1; color: var(--accent); }
 
         /* Hamburger */
-        .hamburger { display: inline-flex; }
+        .hamburger { display: none; }
 
-        .mobile-menu {
-            display: none; position: fixed; top: 52px; left: 0; right: 0;
-            background: var(--bg); border-bottom: 1px solid var(--border);
-            padding: 0.75rem; z-index: 99;
-        }
-        .mobile-menu.open { display: block; }
-        .mobile-menu a {
-            display: flex; align-items: center; gap: 0.5rem;
-            padding: 0.625rem 0.75rem; border-radius: 6px;
-            color: var(--text-sec); text-decoration: none;
-            font-size: 0.875rem; font-weight: 500; transition: all 0.15s;
-        }
-        .mobile-menu a:hover { color: var(--text); background: var(--bg-muted); }
-        .mobile-menu a i, .mobile-menu a svg { width: 15px; height: 15px; }
+        .mobile-menu { display: none; }
 
         /* ---- BUTTONS ---- */
         .btn {
@@ -364,19 +351,11 @@
                 <button data-theme="system"><i data-lucide="monitor"></i> System <i data-lucide="check" class="check"></i></button>
             </div>
         </div>
-        <button class="icon-btn hamburger" onclick="toggleMobile()" aria-label="Menu">
+        <button class="icon-btn hamburger" aria-label="Menu" style="display:none">
             <i data-lucide="menu"></i>
         </button>
     </div>
 </nav>
-
-<div class="mobile-menu" id="mobileMenu">
-    <a href="#features" onclick="closeMobile()"><i data-lucide="layers"></i> Features</a>
-    <a href="#specs" onclick="closeMobile()"><i data-lucide="terminal"></i> Specs</a>
-    <a href="#download" onclick="closeMobile()"><i data-lucide="download"></i> Download</a>
-    <a href="/credits" onclick="closeMobile()"><i data-lucide="users"></i> Credits</a>
-    <a href="https://drive.google.com/drive/folders/1AfJLxATXfBTNWszzUnR4ErOr3gJDcyge?usp=drive_link" target="_blank" rel="noopener"><i data-lucide="external-link"></i> Get ISO</a>
-</div>
 
 <section class="hero">
     <div class="hero-tag">
@@ -578,10 +557,6 @@
     });
 
     applyTheme();
-
-    // Mobile menu
-    function toggleMobile() { document.getElementById('mobileMenu').classList.toggle('open'); }
-    function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); }
 
     // Scroll reveal
     var obs = new IntersectionObserver(function(entries) {
