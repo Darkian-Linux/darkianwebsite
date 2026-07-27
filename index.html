@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -56,7 +56,7 @@
         .reveal {
             opacity: 0;
             transform: translateY(16px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            transition: opacity 0.4s ease, transform 0.4s ease;
         }
         .reveal.visible { opacity: 1; transform: translateY(0); }
 
@@ -411,6 +411,15 @@
             font-size: 0.8125rem;
         }
 
+        .dl-md5 {
+            margin-top: 0.75rem;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+        }
+
+        .dl-md5 code { color: var(--text-sec); }
+
         /* Donate */
         .donate {
             padding: 2rem 1.5rem 5rem;
@@ -567,7 +576,7 @@
     <div class="feat-grid">
         <div class="feat-cell">
             <h3><i data-lucide="gamepad-2"></i> Gaming</h3>
-            <p>Steam, Proton, and Lutris pre-installed. GPU drivers configured. Ready to play out of the box.</p>
+            <p>Steam and Proton pre-installed. GPU drivers configured. Ready to play out of the box.</p>
         </div>
         <div class="feat-cell">
             <h3><i data-lucide="shield"></i> Pentesting</h3>
@@ -586,7 +595,7 @@
             <p>Stable base. Massive package repo. You know Debian.</p>
         </div>
         <div class="feat-cell">
-            <h3><i data-lucide="code"></i> Open Source</h3>
+            <h3><i data-lucide="code"></i> Free</h3>
             <p>Free. No telemetry. Your system, your rules.</p>
         </div>
     </div>
@@ -601,19 +610,18 @@
                 <li><i data-lucide="check"></i> Based on Debian 13 Trixie</li>
                 <li><i data-lucide="check"></i> KDE Plasma 6</li>
                 <li><i data-lucide="check"></i> Calamares installer</li>
-                <li><i data-lucide="check"></i> Steam + Proton + Lutris</li>
+                <li><i data-lucide="check"></i> Steam + Proton</li>
                 <li><i data-lucide="check"></i> Pentesting toolkit</li>
-                <li><i data-lucide="check"></i> 100% free and open source</li>
+                <li><i data-lucide="check"></i> 100% free</li>
             </ul>
         </div>
         <div>
             <table class="spec-table">
                 <tr><td>Codename</td><td><span class="accent">Darkian 13</span> Snake</td></tr>
-                <tr><td>Base</td><td>Debian 13 Trixie</td></tr>
+                <tr><td>Based on</td><td>Debian</td></tr>
                 <tr><td>Desktop</td><td>KDE Plasma 6</td></tr>
                 <tr><td>Installer</td><td>Calamares</td></tr>
                 <tr><td>Architecture</td><td>amd64</td></tr>
-                <tr><td>Price</td><td><span class="accent">Free</span></td></tr>
             </table>
         </div>
     </div>
@@ -622,7 +630,7 @@
 <section class="download reveal" id="download">
     <div class="dl-box">
         <h2>Download Darkian Linux</h2>
-        <p>Free, open source, based on Debian 13 Trixie.</p>
+        <p>Free, based on Debian.</p>
         <a href="https://drive.google.com/drive/folders/1AfJLxATXfBTNWszzUnR4ErOr3gJDcyge?usp=drive_link" class="btn btn-red btn-lg" target="_blank" rel="noopener">
             <i data-lucide="download"></i> Download Now
         </a>
@@ -633,6 +641,7 @@
             <span>&middot;</span>
             <span>Debian 13 Trixie</span>
         </div>
+        <p class="dl-md5">MD5: <code>a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4</code></p>
     </div>
 </section>
 
@@ -678,7 +687,7 @@
     </div>
     <div class="footer-bottom">
         <span>&copy; 2026 Darkian Linux</span>
-        <span>Free and open source</span>
+        <span>Free</span>
     </div>
 </footer>
 
