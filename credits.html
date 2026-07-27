@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credits — Darkian Linux</title>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Darkian-Linux/darkianwebsite/main/darkian.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@0.344.0/dist/umd/lucide.min.js"></script>
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #09090b;
+            --bg-card: #18181b;
+            --bg-muted: #27272a;
+            --border: #27272a;
+            --border-hover: #3f3f46;
+            --text: #fafafa;
+            --text-sec: #a1a1aa;
+            --text-muted: #71717a;
+            --accent: #dc2626;
+            --accent-hover: #b91c1c;
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --radius: 0.75rem;
+        }
+
+        html.light {
+            --bg: #ffffff;
+            --bg-card: #fafafa;
+            --bg-muted: #f4f4f5;
+            --border: #e4e4e7;
+            --border-hover: #d4d4d8;
+            --text: #09090b;
+            --text-sec: #52525b;
+            --text-muted: #a1a1aa;
+            --accent: #dc2626;
+            --accent-hover: #b91c1c;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        /* Nav */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0;
+            z-index: 100; height: 52px; padding: 0 1.5rem;
+            display: flex; align-items: center; justify-content: space-between;
+            background: color-mix(in srgb, var(--bg) 80%, transparent);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-left { display: flex; align-items: center; gap: 1.5rem; }
+        .nav-logo {
+            display: flex; align-items: center; gap: 0.5rem;
+            text-decoration: none; color: var(--text); font-weight: 700; font-size: 0.875rem;
+        }
+        .nav-logo img { height: 24px; width: 24px; object-fit: contain; border-radius: 4px; }
+        .nav-links { display: flex; gap: 0.125rem; list-style: none; }
+        .nav-links a {
+            display: inline-flex; align-items: center; gap: 0.3rem;
+            padding: 0.35rem 0.625rem; border-radius: 6px;
+            color: var(--text-muted); text-decoration: none;
+            font-size: 0.8125rem; font-weight: 500;
+            transition: color 0.15s, background 0.15s;
+        }
+        .nav-links a:hover { color: var(--text); background: var(--bg-muted); }
+        .nav-links i, .nav-links svg { width: 13px; height: 13px; }
+        .nav-right { display: flex; align-items: center; gap: 0.375rem; }
+        .icon-btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 32px; height: 32px; border-radius: 6px;
+            border: 1px solid var(--border); background: transparent;
+            color: var(--text-muted); cursor: pointer; transition: all 0.15s;
+            position: relative;
+        }
+        .icon-btn:hover { color: var(--text); border-color: var(--border-hover); }
+        .icon-btn i, .icon-btn svg { width: 15px; height: 15px; }
+
+        /* Theme dropdown */
+        .theme-wrap { position: relative; }
+        .theme-dropdown {
+            display: none;
+            position: absolute; top: calc(100% + 6px); right: 0;
+            min-width: 140px; background: var(--bg-card);
+            border: 1px solid var(--border); border-radius: var(--radius);
+            padding: 4px; z-index: 200; box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+        .theme-dropdown.open { display: block; }
+        .theme-dropdown button {
+            display: flex; align-items: center; gap: 0.5rem;
+            width: 100%; padding: 6px 10px; border: none;
+            border-radius: calc(var(--radius) - 4px); background: transparent;
+            color: var(--text-sec); font-size: 0.8125rem; font-family: var(--font);
+            cursor: pointer; transition: all 0.1s; text-align: left;
+        }
+        .theme-dropdown button:hover { background: var(--bg-muted); color: var(--text); }
+        .theme-dropdown button.active { color: var(--text); background: var(--bg-muted); }
+        .theme-dropdown button i, .theme-dropdown button svg { width: 14px; height: 14px; flex-shrink: 0; }
+        .theme-dropdown button .check { margin-left: auto; width: 14px; height: 14px; opacity: 0; }
+        .theme-dropdown button.active .check { opacity: 1; color: var(--accent); }
+
+        /* Page */
+        .page { padding: 7rem 1.5rem 4rem; max-width: 640px; margin: 0 auto; }
+
+        .page h1 {
+            font-size: 2rem; font-weight: 800; letter-spacing: -0.03em;
+            margin-bottom: 0.5rem;
+        }
+        .page > p { color: var(--text-sec); font-size: 1rem; margin-bottom: 3rem; }
+
+        /* Team */
+        .team { display: flex; flex-direction: column; gap: 1px; background: var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 2.5rem; }
+
+        .member {
+            display: flex; align-items: center; gap: 1rem;
+            padding: 1.25rem 1.5rem; background: var(--bg-card);
+        }
+
+        .member-avatar {
+            width: 44px; height: 44px; border-radius: 50%;
+            background: var(--bg-muted); display: flex; align-items: center;
+            justify-content: center; flex-shrink: 0; overflow: hidden;
+        }
+
+        .member-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+        .member-info { flex: 1; min-width: 0; }
+        .member-name { font-size: 0.9375rem; font-weight: 600; }
+        .member-role { font-size: 0.8125rem; color: var(--text-muted); }
+
+        .member-links { display: flex; gap: 0.375rem; flex-shrink: 0; }
+
+        .member-links a {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 30px; height: 30px; border-radius: 6px;
+            border: 1px solid var(--border); color: var(--text-muted);
+            text-decoration: none; transition: all 0.15s;
+        }
+        .member-links a:hover { color: var(--text); border-color: var(--border-hover); }
+        .member-links a i, .member-links a svg { width: 14px; height: 14px; }
+
+        /* Footer */
+        footer { border-top: 1px solid var(--border); padding: 2rem 1.5rem; margin-top: 4rem; }
+        .footer-inner {
+            max-width: 640px; margin: 0 auto;
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem;
+        }
+        .footer-brand p { color: var(--text-muted); font-size: 0.8125rem; margin-top: 0.5rem; line-height: 1.5; }
+        .footer-col h4 {
+            font-size: 0.75rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.05em;
+            color: var(--text-muted); margin-bottom: 0.75rem;
+        }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.375rem; }
+        .footer-col a {
+            display: inline-flex; align-items: center; gap: 0.3rem;
+            color: var(--text-sec); text-decoration: none; font-size: 0.8125rem;
+            transition: color 0.15s;
+        }
+        .footer-col a:hover { color: var(--text); }
+        .footer-col a i, .footer-col a svg { width: 11px; height: 11px; }
+        .footer-bottom {
+            max-width: 640px; margin: 1.5rem auto 0;
+            padding-top: 1.5rem; border-top: 1px solid var(--border);
+            display: flex; justify-content: space-between;
+            color: var(--text-muted); font-size: 0.75rem;
+        }
+
+        @media (max-width: 768px) {
+            .footer-inner { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        }
+        @media (max-width: 480px) {
+            .footer-inner { grid-template-columns: 1fr; }
+            .member { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-left">
+        <a href="index.html" class="nav-logo">
+            <img src="https://raw.githubusercontent.com/Darkian-Linux/darkianwebsite/main/darkian.png" alt="Darkian Linux">
+            <span>Darkian Linux</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html#features"><i data-lucide="layers"></i> Features</a></li>
+            <li><a href="index.html#specs"><i data-lucide="terminal"></i> Specs</a></li>
+            <li><a href="index.html#download"><i data-lucide="download"></i> Download</a></li>
+        </ul>
+    </div>
+    <div class="nav-right">
+        <div class="theme-wrap">
+            <button class="icon-btn" id="themeBtn" aria-label="Change theme">
+                <i data-lucide="sun" class="t-icon t-light"></i>
+                <i data-lucide="moon" class="t-icon t-dark"></i>
+                <i data-lucide="monitor" class="t-icon t-system"></i>
+            </button>
+            <div class="theme-dropdown" id="themeDropdown">
+                <button data-theme="light"><i data-lucide="sun"></i> Light <i data-lucide="check" class="check"></i></button>
+                <button data-theme="dark"><i data-lucide="moon"></i> Dark <i data-lucide="check" class="check"></i></button>
+                <button data-theme="system"><i data-lucide="monitor"></i> System <i data-lucide="check" class="check"></i></button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<section class="page">
+    <h1>Credits</h1>
+    <p>The people behind Darkian Linux.</p>
+
+    <div class="team">
+        <div class="member">
+            <div class="member-avatar">
+                <img src="https://avatars.githubusercontent.com/u/114651592" alt="LordPipon">
+            </div>
+            <div class="member-info">
+                <div class="member-name">LordPipon</div>
+                <div class="member-role">Lead Developer</div>
+            </div>
+            <div class="member-links">
+                <a href="https://github.com/lordpipon" target="_blank" rel="noopener" aria-label="GitHub"><i data-lucide="github"></i></a>
+                <a href="https://discord.com/users/piponidlo" target="_blank" rel="noopener" aria-label="Discord"><i data-lucide="message-circle"></i></a>
+            </div>
+        </div>
+        <div class="member">
+            <div class="member-avatar">
+                <img src="https://avatars.githubusercontent.com/u/112984422" alt="rm13">
+            </div>
+            <div class="member-info">
+                <div class="member-name">rm13</div>
+                <div class="member-role">Logo Designer</div>
+            </div>
+            <div class="member-links">
+                <a href="https://github.com/rm1300" target="_blank" rel="noopener" aria-label="GitHub"><i data-lucide="github"></i></a>
+                <a href="https://github.com/martin-Corporation" target="_blank" rel="noopener" aria-label="Organization"><i data-lucide="building-2"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <a href="index.html" class="nav-logo">
+                <img src="https://raw.githubusercontent.com/Darkian-Linux/darkianwebsite/main/darkian.png" alt="Darkian Linux">
+                <span style="font-size:0.8125rem">Darkian Linux</span>
+            </a>
+            <p>Gaming and pentesting distro based on Debian 13 Trixie.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Project</h4>
+            <ul>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#specs">Specs</a></li>
+                <li><a href="index.html#download">Download</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Community</h4>
+            <ul>
+                <li><a href="https://github.com/Darkian-Linux" target="_blank" rel="noopener"><i data-lucide="github"></i> GitHub</a></li>
+                <li><a href="https://ko-fi.com/piponidlo" target="_blank" rel="noopener"><i data-lucide="heart"></i> Donate</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Upstream</h4>
+            <ul>
+                <li><a href="https://www.debian.org/" target="_blank" rel="noopener"><i data-lucide="external-link"></i> Debian</a></li>
+                <li><a href="https://kde.org/" target="_blank" rel="noopener"><i data-lucide="external-link"></i> KDE</a></li>
+                <li><a href="https://calamares.io/" target="_blank" rel="noopener"><i data-lucide="external-link"></i> Calamares</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>&copy; 2026 Darkian Linux</span>
+        <span>Free</span>
+    </div>
+</footer>
+
+<script>
+    var STORAGE_KEY = 'darkian-theme';
+    var html = document.documentElement;
+
+    function getSystemTheme() { return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    function getStoredTheme() { return localStorage.getItem(STORAGE_KEY) || 'system'; }
+    function getEffectiveTheme(s) { return s === 'system' ? getSystemTheme() : s; }
+
+    function applyTheme() {
+        var stored = getStoredTheme();
+        var effective = getEffectiveTheme(stored);
+        html.classList.remove('light', 'dark');
+        html.classList.add(effective);
+        document.querySelectorAll('.theme-dropdown button').forEach(function(b) {
+            b.classList.toggle('active', b.getAttribute('data-theme') === stored);
+        });
+        var icons = document.querySelectorAll('.t-icon');
+        icons.forEach(function(i) { i.style.display = 'none'; });
+        var sel = stored === 'system' ? 'system' : (stored === 'light' ? 'light' : 'dark');
+        html.querySelector('.t-' + sel).style.display = '';
+    }
+
+    document.getElementById('themeBtn').addEventListener('click', function(e) {
+        e.stopPropagation();
+        document.getElementById('themeDropdown').classList.toggle('open');
+    });
+
+    document.querySelectorAll('.theme-dropdown button').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            localStorage.setItem(STORAGE_KEY, this.getAttribute('data-theme'));
+            applyTheme();
+            document.getElementById('themeDropdown').classList.remove('open');
+        });
+    });
+
+    document.addEventListener('click', function() { document.getElementById('themeDropdown').classList.remove('open'); });
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function() { if (getStoredTheme() === 'system') applyTheme(); });
+
+    applyTheme();
+    lucide.createIcons();
+</script>
+
+</body>
+</html>
