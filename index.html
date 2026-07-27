@@ -1,136 +1,216 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Darkian Linux — The Ultimate Gaming & Pentesting Distro</title>
-    <meta name="description" content="Darkian Linux — A Debian-based distribution built for gamers and penetration testers. KDE Plasma, Calamares installer, and everything you need.">
+    <title>Darkian Linux</title>
+        <meta name="description" content="Darkian Linux — Debian-based distro for gamers and penetration testers.">
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Darkian-Linux/darkianwebsite/main/darkian.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <style>
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --bg-primary: #0a0a0a;
-            --bg-secondary: #111111;
-            --bg-card: #161616;
-            --bg-card-hover: #1c1c1c;
-            --border-color: #222222;
-            --text-primary: #f0f0f0;
-            --text-secondary: #a0a0a0;
-            --text-muted: #666666;
-            --accent: #4ade80;
-            --accent-hover: #22c55e;
-            --accent-glow: rgba(74, 222, 128, 0.15);
-            --gradient-start: #4ade80;
-            --gradient-end: #22d3ee;
+            --bg: #09090b;
+            --bg-card: #18181b;
+            --bg-muted: #27272a;
+            --border: #27272a;
+            --border-hover: #3f3f46;
+            --text: #fafafa;
+            --text-sec: #a1a1aa;
+            --text-muted: #71717a;
+            --accent: #dc2626;
+            --accent-hover: #b91c1c;
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --radius: 0.75rem;
         }
 
-        html {
-            scroll-behavior: smooth;
+        html.light {
+            --bg: #ffffff;
+            --bg-card: #fafafa;
+            --bg-muted: #f4f4f5;
+            --border: #e4e4e7;
+            --border-hover: #d4d4d8;
+            --text: #09090b;
+            --text-sec: #52525b;
+            --text-muted: #a1a1aa;
+            --accent: #dc2626;
+            --accent-hover: #b91c1c;
         }
+
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+            transition: background 0.2s, color 0.2s;
         }
 
-        /* NAV */
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* Nav */
         nav {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             z-index: 100;
-            padding: 1rem 2rem;
+            height: 52px;
+            padding: 0 1.5rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-color);
+            background: color-mix(in srgb, var(--bg) 80%, transparent);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
         }
+
+        .nav-left { display: flex; align-items: center; gap: 1.5rem; }
 
         .nav-logo {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.5rem;
             text-decoration: none;
-            color: var(--text-primary);
+            color: var(--text);
+            font-weight: 700;
+            font-size: 0.875rem;
         }
 
         .nav-logo img {
-            height: 36px;
-            width: 36px;
+            height: 24px; width: 24px;
             object-fit: contain;
-            border-radius: 6px;
-        }
-
-        .nav-logo span {
-            font-size: 1.15rem;
-            font-weight: 700;
+            border-radius: 4px;
         }
 
         .nav-links {
             display: flex;
-            align-items: center;
-            gap: 2rem;
+            gap: 0.125rem;
             list-style: none;
         }
 
         .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: var(--text-primary);
-        }
-
-        .nav-badge {
             display: inline-flex;
             align-items: center;
-            gap: 0.4rem;
-            padding: 0.4rem 0.9rem;
-            border-radius: 999px;
-            border: 1px solid var(--border-color);
-            background: var(--bg-card);
-            color: var(--text-secondary);
-            font-size: 0.8rem;
+            gap: 0.3rem;
+            padding: 0.35rem 0.625rem;
+            border-radius: 6px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.8125rem;
             font-weight: 500;
+            transition: color 0.15s, background 0.15s;
         }
 
-        .nav-badge svg {
-            width: 14px;
-            height: 14px;
+        .nav-links a:hover { color: var(--text); background: var(--bg-muted); }
+        .nav-links a svg { width: 13px; height: 13px; }
+
+        .nav-right { display: flex; align-items: center; gap: 0.375rem; }
+
+        .nav-dl {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 9999px;
+            border: 1px solid var(--border);
+            color: var(--text-sec);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: all 0.15s;
         }
 
-        .hamburger {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-primary);
+        .nav-dl:hover { border-color: var(--accent); color: var(--text); }
+        .nav-dl svg { width: 12px; height: 12px; }
+
+        .icon-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px; height: 32px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-muted);
             cursor: pointer;
+            transition: all 0.15s;
         }
 
-        .hamburger svg {
-            width: 24px;
-            height: 24px;
+        .icon-btn:hover { color: var(--text); border-color: var(--border-hover); }
+        .icon-btn svg { width: 15px; height: 15px; }
+
+        .hamburger { display: none; }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 52px; left: 0; right: 0;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem;
+            z-index: 99;
+        }
+        .mobile-menu.open { display: block; }
+        .mobile-menu a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.625rem 0.75rem;
+            border-radius: 6px;
+            color: var(--text-sec);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.15s;
+        }
+        .mobile-menu a:hover { color: var(--text); background: var(--bg-muted); }
+        .mobile-menu a svg { width: 15px; height: 15px; }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            font-weight: 500;
+            font-family: var(--font);
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.15s;
+            white-space: nowrap;
         }
 
-        /* HERO */
+        .btn svg { width: 16px; height: 16px; }
+
+        .btn-red { background: var(--accent); color: #fff; }
+        .btn-red:hover { background: var(--accent-hover); }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover { background: var(--bg-muted); border-color: var(--border-hover); }
+
+        .btn-lg { padding: 0.625rem 1.25rem; font-size: 0.9375rem; }
+
+        /* Hero */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -138,760 +218,498 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 8rem 2rem 4rem;
-            position: relative;
-            overflow: hidden;
+            padding: 6rem 1.5rem 4rem;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -200px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .hero-stats {
-            display: flex;
+        .hero-tag {
+            display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            border-radius: 999px;
-            border: 1px solid var(--border-color);
-            background: var(--bg-secondary);
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            margin-bottom: 2rem;
+            gap: 0.4rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.8125rem;
+            margin-bottom: 1.5rem;
         }
 
-        .hero-stats .dot {
-            width: 6px;
-            height: 6px;
+        .hero-tag .dot {
+            width: 6px; height: 6px;
             border-radius: 50%;
             background: var(--accent);
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-size: clamp(2.5rem, 6vw, 4.25rem);
             font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            max-width: 800px;
-        }
-
-        .hero h1 .gradient {
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            max-width: 550px;
-            margin-bottom: 2.5rem;
-            line-height: 1.7;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.85rem 1.75rem;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s;
-            cursor: pointer;
-            border: none;
-        }
-
-        .btn svg {
-            width: 18px;
-            height: 18px;
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: #000;
-        }
-
-        .btn-primary:hover {
-            background: var(--accent-hover);
-            box-shadow: 0 0 30px var(--accent-glow);
-        }
-
-        .btn-secondary {
-            background: var(--bg-card);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-        }
-
-        .btn-secondary:hover {
-            background: var(--bg-card-hover);
-            border-color: #333;
-        }
-
-        /* SHOWCASE */
-        .showcase {
-            padding: 4rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .showcase-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-        }
-
-        .showcase-card {
-            position: relative;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            background: var(--bg-card);
-            overflow: hidden;
-            aspect-ratio: 16/10;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .showcase-card .card-bg {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-card) 100%);
-        }
-
-        .showcase-card .card-content {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .showcase-card .card-icon {
-            font-size: 3rem;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
             margin-bottom: 1rem;
+            max-width: 640px;
         }
 
-        .showcase-card .card-label {
-            position: absolute;
-            bottom: 1rem;
-            left: 1rem;
-            z-index: 1;
-            padding: 0.4rem 0.8rem;
-            border-radius: 8px;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
-            font-size: 0.85rem;
-            font-weight: 600;
+        .hero h1 span { color: var(--accent); }
+
+        .hero-desc {
+            font-size: 1.0625rem;
+            color: var(--text-sec);
+            max-width: 480px;
+            margin-bottom: 2rem;
+            line-height: 1.65;
         }
 
-        /* FEATURES */
+        .hero-btns { display: flex; gap: 0.625rem; flex-wrap: wrap; justify-content: center; }
+
+        /* Features */
         .features {
-            padding: 6rem 2rem;
-            max-width: 1200px;
+            padding: 4rem 1.5rem;
+            max-width: 1060px;
             margin: 0 auto;
         }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-header .label {
-            display: inline-block;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--accent);
-            margin-bottom: 1rem;
-        }
-
-        .section-header h2 {
-            font-size: clamp(1.8rem, 4vw, 2.8rem);
-            font-weight: 800;
-            margin-bottom: 1rem;
-        }
-
-        .section-header p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-        }
-
-        .feature-card {
-            padding: 2rem;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            background: var(--bg-card);
-            transition: all 0.3s;
-        }
-
-        .feature-card:hover {
-            border-color: #333;
-            background: var(--bg-card-hover);
-        }
-
-        .feature-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            background: var(--accent-glow);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.25rem;
+        .features h2 {
             font-size: 1.5rem;
-        }
-
-        .feature-card h3 {
-            font-size: 1.2rem;
             font-weight: 700;
-            margin-bottom: 0.75rem;
-        }
-
-        .feature-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
-
-        /* SPECS */
-        .specs {
-            padding: 6rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .specs-layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .specs-text h2 {
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-        }
-
-        .specs-text p {
-            color: var(--text-secondary);
-            font-size: 1.05rem;
-            line-height: 1.8;
+            letter-spacing: -0.02em;
             margin-bottom: 2rem;
         }
 
-        .specs-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .specs-list li {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 1rem;
-            color: var(--text-secondary);
-        }
-
-        .specs-list li .check {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: var(--accent-glow);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .specs-list li .check svg {
-            width: 14px;
-            height: 14px;
-            color: var(--accent);
-        }
-
-        .specs-visual {
-            border-radius: 20px;
-            border: 1px solid var(--border-color);
-            background: var(--bg-card);
-            padding: 3rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .spec-block {
-            padding: 1.25rem;
-            border-radius: 12px;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-        }
-
-        .spec-block .spec-label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-        }
-
-        .spec-block .spec-value {
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-
-        .spec-block .spec-value .accent {
-            color: var(--accent);
-        }
-
-        /* DOWNLOAD */
-        .download {
-            padding: 6rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .download-box {
-            border-radius: 24px;
-            border: 1px solid var(--border-color);
-            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
-            padding: 4rem;
-            text-align: center;
-            position: relative;
+        .feat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border-radius: var(--radius);
             overflow: hidden;
         }
 
-        .download-box::before {
-            content: '';
-            position: absolute;
-            bottom: -200px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-            pointer-events: none;
+        .feat-cell {
+            padding: 1.5rem;
+            background: var(--bg-card);
         }
 
-        .download-box .content {
-            position: relative;
-            z-index: 1;
+        .feat-cell h3 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            margin-bottom: 0.375rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .download-box h2 {
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            font-weight: 800;
-            margin-bottom: 1rem;
+        .feat-cell h3 svg { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; }
+
+        .feat-cell p {
+            color: var(--text-sec);
+            font-size: 0.8125rem;
+            line-height: 1.55;
         }
 
-        .download-box p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            max-width: 500px;
-            margin: 0 auto 2rem;
+        /* Specs */
+        .specs {
+            padding: 4rem 1.5rem;
+            max-width: 1060px;
+            margin: 0 auto;
         }
 
-        .download-info {
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .specs h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+        }
+
+        .specs-desc {
+            color: var(--text-sec);
+            font-size: 0.9375rem;
+            line-height: 1.65;
+            margin-bottom: 1.5rem;
+        }
+
+        .spec-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.625rem;
+        }
+
+        .spec-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-sec);
+        }
+
+        .spec-list li svg { width: 15px; height: 15px; color: var(--accent); flex-shrink: 0; }
+
+        .spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .spec-table tr { border-bottom: 1px solid var(--border); }
+        .spec-table tr:last-child { border-bottom: none; }
+
+        .spec-table td {
+            padding: 0.875rem 1rem;
+            font-size: 0.875rem;
+        }
+
+        .spec-table td:first-child {
+            color: var(--text-muted);
+            font-weight: 500;
+            width: 40%;
+        }
+
+        .spec-table td:last-child { font-weight: 600; }
+        .spec-table .accent { color: var(--accent); }
+
+        /* Download */
+        .download {
+            padding: 4rem 1.5rem;
+            max-width: 1060px;
+            margin: 0 auto;
+        }
+
+        .dl-box {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--bg-card);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .dl-box h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .dl-box p {
+            color: var(--text-sec);
+            font-size: 0.9375rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .dl-meta {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .download-info span {
+            gap: 0.75rem;
+            margin-top: 1.25rem;
             color: var(--text-muted);
-            font-size: 0.85rem;
+            font-size: 0.8125rem;
         }
 
-        /* DONATE */
+        /* Donate */
         .donate {
-            padding: 4rem 2rem 6rem;
+            padding: 2rem 1.5rem 5rem;
             text-align: center;
         }
 
         .donate p {
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 0.75rem;
         }
 
         .donate a {
-            color: var(--accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            color: var(--text-sec);
             text-decoration: none;
-            font-weight: 600;
+            font-size: 0.875rem;
+            font-weight: 500;
+            padding: 0.4rem 0.875rem;
+            border-radius: 9999px;
+            border: 1px solid var(--border);
+            transition: all 0.15s;
         }
 
-        .donate a:hover {
-            text-decoration: underline;
-        }
+        .donate a:hover { color: var(--text); border-color: var(--border-hover); }
+        .donate a svg { width: 14px; height: 14px; }
 
-        /* FOOTER */
+        /* Footer */
         footer {
-            border-top: 1px solid var(--border-color);
-            padding: 3rem 2rem;
+            border-top: 1px solid var(--border);
+            padding: 2rem 1.5rem;
         }
 
         .footer-inner {
-            max-width: 1200px;
+            max-width: 1060px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 3rem;
+            gap: 2rem;
         }
 
         .footer-brand p {
             color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-top: 0.75rem;
-            line-height: 1.7;
+            font-size: 0.8125rem;
+            margin-top: 0.5rem;
+            line-height: 1.5;
         }
 
         .footer-col h4 {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.05em;
             color: var(--text-muted);
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
         }
 
-        .footer-col ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
-        }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.375rem; }
 
         .footer-col a {
-            color: var(--text-secondary);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: var(--text-sec);
             text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.2s;
+            font-size: 0.8125rem;
+            transition: color 0.15s;
         }
 
-        .footer-col a:hover {
-            color: var(--text-primary);
-        }
+        .footer-col a:hover { color: var(--text); }
+        .footer-col a svg { width: 11px; height: 11px; }
 
         .footer-bottom {
-            max-width: 1200px;
-            margin: 2rem auto 0;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-color);
+            max-width: 1060px;
+            margin: 1.5rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
             display: flex;
-            align-items: center;
             justify-content: space-between;
             color: var(--text-muted);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
         }
 
-        /* MOBILE */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .nav-badge {
-                display: none;
-            }
-
-            .hamburger {
-                display: block;
-            }
-
-            .showcase-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .specs-layout {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .footer-inner {
-                grid-template-columns: 1fr 1fr;
-                gap: 2rem;
-            }
-
-            .download-box {
-                padding: 2.5rem 1.5rem;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                gap: 0.5rem;
-                text-align: center;
-            }
+            .nav-links, .nav-dl { display: none; }
+            .hamburger { display: inline-flex; }
+            .feat-grid { grid-template-columns: 1fr; }
+            .specs-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .footer-inner { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+            .hero { padding-top: 5rem; }
         }
 
         @media (max-width: 480px) {
-            .footer-inner {
-                grid-template-columns: 1fr;
-            }
+            .footer-inner { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <nav>
+<nav>
+    <div class="nav-left">
         <a href="#" class="nav-logo">
             <img src="https://raw.githubusercontent.com/Darkian-Linux/darkianwebsite/main/darkian.png" alt="Darkian Linux">
             <span>Darkian Linux</span>
         </a>
         <ul class="nav-links">
-            <li><a href="#features">Features</a></li>
-            <li><a href="#specs">Specs</a></li>
-            <li><a href="#download">Download</a></li>
+            <li><a href="#features"><i data-lucide="layers"></i> Features</a></li>
+            <li><a href="#specs"><i data-lucide="terminal"></i> Specs</a></li>
+            <li><a href="#download"><i data-lucide="download"></i> Download</a></li>
         </ul>
-        <a href="https://drive.google.com/drive/folders/1AfJLxATXfBTNWszzUnR4ErOr3gJDcyge?usp=drive_link" class="nav-badge" target="_blank" rel="noopener">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Download
+    </div>
+    <div class="nav-right">
+        <a href="https://drive.google.com/drive/folders/1AfJLxATXfBTNWszzUnR4ErOr3gJDcyge?usp=drive_link" class="nav-dl" target="_blank" rel="noopener">
+            <i data-lucide="download"></i> Download
         </a>
-        <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('show')">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <button class="icon-btn" onclick="toggleTheme()" aria-label="Toggle theme">
+            <i data-lucide="sun" class="theme-light"></i>
+            <i data-lucide="moon" class="theme-dark"></i>
         </button>
-    </nav>
+        <button class="icon-btn hamburger" onclick="toggleMobile()" aria-label="Menu">
+            <i data-lucide="menu"></i>
+        </button>
+    </div>
+</nav>
 
-    <section class="hero">
-        <div class="hero-stats">
-            <span class="dot"></span>
-            Debian 13 Trixie · Darkian 13 Snake
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#features" onclick="closeMobile()"><i data-lucide="layers"></i> Features</a>
+    <a href="#specs" onclick="closeMobile()"><i data-lucide="terminal"></i> Specs</a>
+    <a href="#download" onclick="closeMobile()"><i data-lucide="download"></i> Download</a>
+    <a href="https://drive.google.com/drive/folders/1AfJLxATXfBTNWszzUnR4ErOr3gJDcyge?usp=drive_link" target="_blank" rel="noopener"><i data-lucide="external-link"></i> Get ISO</a>
+</div>
+
+<section class="hero">
+    <div class="hero-tag">
+        <span class="dot"></span>
+        Darkian 13 Snake &middot; Debian 13 Trixie
+    </div>
+    <h1>A Linux distro for <span>gamers</span> and <span>hackers.</span></h1>
+    <p class="hero-desc">KDE Plasma, Calamares installer, gaming stack, and pentesting tools. Built on Debian stable. No telemetry, no tracking.</p>
+    <div class="hero-btns">
+        <a href="#download" class="btn btn-red btn-lg">
+            <i data-lucide="download"></i> Download
+        </a>
+        <a href="https://github.com/Darkian-Linux" class="btn btn-outline btn-lg" target="_blank" rel="noopener">
+            <i data-lucide="github"></i> GitHub
+        </a>
+    </div>
+</section>
+
+<section class="features reveal" id="features">
+    <h2>What you get</h2>
+    <div class="feat-grid">
+        <div class="feat-cell">
+            <h3><i data-lucide="gamepad-2"></i> Gaming</h3>
+            <p>Steam, Proton, and Lutris pre-installed. GPU drivers configured. Ready to play out of the box.</p>
         </div>
-        <h1>The Linux distro for <span class="gradient">gamers & hackers.</span></h1>
-        <p>Darkian Linux is a Debian-based distribution built for gaming and penetration testing. KDE Plasma desktop, Calamares installer, and all the tools you need — out of the box.</p>
-        <div class="hero-buttons">
-            <a href="#download" class="btn btn-primary">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                Download Darkian Linux
+        <div class="feat-cell">
+            <h3><i data-lucide="shield"></i> Pentesting</h3>
+            <p>Nmap, Wireshark, Metasploit, and other security tools bundled in. The usual arsenal.</p>
+        </div>
+        <div class="feat-cell">
+            <h3><i data-lucide="monitor"></i> KDE Plasma</h3>
+            <p>Plasma 6 desktop. Fast, customizable, and doesn't get in your way.</p>
+        </div>
+        <div class="feat-cell">
+            <h3><i data-lucide="zap"></i> Calamares Installer</h3>
+            <p>Graphical installer. Dual-boot, auto-partition, done in minutes.</p>
+        </div>
+        <div class="feat-cell">
+            <h3><i data-lucide="box"></i> Debian 13 Trixie</h3>
+            <p>Stable base. Massive package repo. You know Debian.</p>
+        </div>
+        <div class="feat-cell">
+            <h3><i data-lucide="code"></i> Open Source</h3>
+            <p>Free. No telemetry. Your system, your rules.</p>
+        </div>
+    </div>
+</section>
+
+<section class="specs reveal" id="specs">
+    <div class="specs-grid">
+        <div>
+            <h2>The details</h2>
+            <p class="specs-desc">Purpose-built for gaming and security work on top of a Debian stable base.</p>
+            <ul class="spec-list">
+                <li><i data-lucide="check"></i> Based on Debian 13 Trixie</li>
+                <li><i data-lucide="check"></i> KDE Plasma 6</li>
+                <li><i data-lucide="check"></i> Calamares installer</li>
+                <li><i data-lucide="check"></i> Steam + Proton + Lutris</li>
+                <li><i data-lucide="check"></i> Pentesting toolkit</li>
+                <li><i data-lucide="check"></i> 100% free and open source</li>
+            </ul>
+        </div>
+        <div>
+            <table class="spec-table">
+                <tr><td>Codename</td><td><span class="accent">Darkian 13</span> Snake</td></tr>
+                <tr><td>Base</td><td>Debian 13 Trixie</td></tr>
+                <tr><td>Desktop</td><td>KDE Plasma 6</td></tr>
+                <tr><td>Installer</td><td>Calamares</td></tr>
+                <tr><td>Architecture</td><td>amd64</td></tr>
+                <tr><td>Price</td><td><span class="accent">Free</span></td></tr>
+            </table>
+        </div>
+    </div>
+</section>
+
+<section class="download reveal" id="download">
+    <div class="dl-box">
+        <h2>Download Darkian Linux</h2>
+        <p>Free, open source, based on Debian 13 Trixie.</p>
+        <a href="https://drive.google.com/drive/folders/1AfJLxATXfBTNWszzUnR4ErOr3gJDcyge?usp=drive_link" class="btn btn-red btn-lg" target="_blank" rel="noopener">
+            <i data-lucide="download"></i> Download Now
+        </a>
+        <div class="dl-meta">
+            <span>amd64</span>
+            <span>&middot;</span>
+            <span>Free</span>
+            <span>&middot;</span>
+            <span>Debian 13 Trixie</span>
+        </div>
+    </div>
+</section>
+
+<section class="donate">
+    <p>Like Darkian? Consider supporting the project.</p>
+    <a href="https://ko-fi.com/piponidlo" target="_blank" rel="noopener">
+        <i data-lucide="coffee"></i> Donate on Ko-fi
+    </a>
+</section>
+
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <a href="#" class="nav-logo">
+                <img src="https://raw.githubusercontent.com/Darkian-Linux/darkianwebsite/main/darkian.png" alt="Darkian Linux">
+                <span style="font-size:0.8125rem">Darkian Linux</span>
             </a>
-            <a href="https://github.com/Darkian-Linux" class="btn btn-secondary" target="_blank" rel="noopener">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-                View on GitHub
-            </a>
+            <p>Gaming and pentesting distro based on Debian 13 Trixie.</p>
         </div>
-    </section>
+        <div class="footer-col">
+            <h4>Project</h4>
+            <ul>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#specs">Specs</a></li>
+                <li><a href="#download">Download</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Community</h4>
+            <ul>
+                <li><a href="https://github.com/Darkian-Linux" target="_blank" rel="noopener"><i data-lucide="github"></i> GitHub</a></li>
+                <li><a href="https://ko-fi.com/piponidlo" target="_blank" rel="noopener"><i data-lucide="heart"></i> Donate</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Upstream</h4>
+            <ul>
+                <li><a href="https://www.debian.org/" target="_blank" rel="noopener"><i data-lucide="external-link"></i> Debian</a></li>
+                <li><a href="https://kde.org/" target="_blank" rel="noopener"><i data-lucide="external-link"></i> KDE</a></li>
+                <li><a href="https://calamares.io/" target="_blank" rel="noopener"><i data-lucide="external-link"></i> Calamares</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>&copy; 2026 Darkian Linux</span>
+        <span>Free and open source</span>
+    </div>
+</footer>
 
-    <section class="showcase">
-        <div class="showcase-grid">
-            <div class="showcase-card">
-                <div class="card-bg" style="background: linear-gradient(135deg, #1a0a2e, #16213e);"></div>
-                <div class="card-content">
-                    <div class="card-icon">🎮</div>
-                </div>
-                <div class="card-label">Gaming Ready</div>
-            </div>
-            <div class="showcase-card">
-                <div class="card-bg" style="background: linear-gradient(135deg, #0a1628, #0d2818);"></div>
-                <div class="card-content">
-                    <div class="card-icon">🔓</div>
-                </div>
-                <div class="card-label">Penetration Testing</div>
-            </div>
-            <div class="showcase-card">
-                <div class="card-bg" style="background: linear-gradient(135deg, #1a1a2e, #16213e);"></div>
-                <div class="card-content">
-                    <div class="card-icon">🖥️</div>
-                </div>
-                <div class="card-label">KDE Plasma</div>
-            </div>
-        </div>
-    </section>
+<script>
+    lucide.createIcons();
 
-    <section class="features" id="features">
-        <div class="section-header">
-            <span class="label">Features</span>
-            <h2>Everything you need</h2>
-            <p>Built on Debian 13 Trixie. Designed for performance, security, and ease of use.</p>
-        </div>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">🎮</div>
-                <h3>Gaming Optimized</h3>
-                <p>Pre-configured with Steam, Proton, Lutris, and GPU drivers out of the box. Play your favorite games on day one with maximum performance.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🔓</div>
-                <h3>Penetration Testing</h3>
-                <p>Packed with industry-standard security tools like Nmap, Wireshark, Metasploit, and more. Everything a security professional needs, ready to go.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🖥️</div>
-                <h3>KDE Plasma Desktop</h3>
-                <p>A beautiful, customizable, and modern desktop experience. KDE Plasma gives you full control over your workflow and aesthetics.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">⚡</div>
-                <h3>Easy Calamares Installer</h3>
-                <p>Graphical installer that makes setup a breeze. Dual-boot support, auto-partitioning, and a smooth installation experience for everyone.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🏗️</div>
-                <h3>Debian 13 Trixie Base</h3>
-                <p>Built on the rock-solid foundation of Debian 13 Trixie. Enjoy thousands of packages, stability, and the Debian community's trust.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🐍</div>
-                <h3>Darkian 13 Snake</h3>
-                <p>Our flagship release — codenamed "Snake" — brings together gaming and security in one sleek, fast, and reliable operating system.</p>
-            </div>
-        </div>
-    </section>
+    function getTheme() { return localStorage.getItem('darkian-theme') || 'dark'; }
 
-    <section class="specs" id="specs">
-        <div class="specs-layout">
-            <div class="specs-text">
-                <h2>Built different.</h2>
-                <p>Darkian Linux isn't just another distro. It's purpose-built for two worlds that rarely meet — gaming and cybersecurity — and it does both exceptionally well.</p>
-                <ul class="specs-list">
-                    <li>
-                        <span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                        Based on Debian 13 Trixie
-                    </li>
-                    <li>
-                        <span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                        KDE Plasma 6 Desktop
-                    </li>
-                    <li>
-                        <span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                        Calamares Graphical Installer
-                    </li>
-                    <li>
-                        <span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                        Pre-installed Gaming Stack
-                    </li>
-                    <li>
-                        <span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                        Full Pentesting Toolkit
-                    </li>
-                    <li>
-                        <span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                        Free &amp; Open Source
-                    </li>
-                </ul>
-            </div>
-            <div class="specs-visual">
-                <div class="spec-block">
-                    <div class="spec-label">Codename</div>
-                    <div class="spec-value"><span class="accent">Darkian 13</span> Snake</div>
-                </div>
-                <div class="spec-block">
-                    <div class="spec-label">Base</div>
-                    <div class="spec-value">Debian 13 Trixie</div>
-                </div>
-                <div class="spec-block">
-                    <div class="spec-label">Desktop</div>
-                    <div class="spec-value">KDE Plasma 6</div>
-                </div>
-                <div class="spec-block">
-                    <div class="spec-label">Installer</div>
-                    <div class="spec-value">Calamares</div>
-                </div>
-                <div class="spec-block">
-                    <div class="spec-label">Price</div>
-                    <div class="spec-value"><span class="accent">Free</span></div>
-                </div>
-            </div>
-        </div>
-    </section>
+    function applyTheme(theme) {
+        document.documentElement.classList.remove('light', 'dark');
+        document.documentElement.classList.add(theme);
+        localStorage.setItem('darkian-theme', theme);
+        const lightIcons = document.querySelectorAll('.theme-light');
+        const darkIcons = document.querySelectorAll('.theme-dark');
+        lightIcons.forEach(i => i.style.display = theme === 'light' ? 'none' : '');
+        darkIcons.forEach(i => i.style.display = theme === 'dark' ? 'none' : '');
+    }
 
-    <section class="download" id="download">
-        <div class="download-box">
-            <div class="content">
-                <h2>Download Darkian Linux</h2>
-                <p>Get Darkian Linux 13 Snake — free, open source, and ready to go. Based on Debian 13 Trixie.</p>
-                <div class="hero-buttons">
-                    <a href="https://drive.google.com/drive/folders/1AfJLxATXfBTNWszzUnR4ErOr3gJDcyge?usp=drive_link" class="btn btn-primary" id="download-btn" target="_blank" rel="noopener">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        Download Now
-                    </a>
-                </div>
-                <div class="download-info">
-                    <span>amd64 / x86_64</span>
-                    <span>·</span>
-                    <span>Free forever</span>
-                    <span>·</span>
-                    <span>Debian 13 Trixie</span>
-                </div>
-            </div>
-        </div>
-    </section>
+    function toggleTheme() { applyTheme(getTheme() === 'dark' ? 'light' : 'dark'); }
 
-    <section class="donate">
-        <p>Enjoying Darkian Linux? Consider supporting the project:</p>
-        <a href="https://ko-fi.com/piponidlo" target="_blank" rel="noopener">Donate on Ko-fi ❤️</a>
-    </section>
+    applyTheme(getTheme());
 
-    <footer>
-        <div class="footer-inner">
-            <div class="footer-brand">
-                <a href="#" class="nav-logo" style="margin-bottom: 0.5rem;">
-                    <img src="https://raw.githubusercontent.com/Darkian-Linux/darkianwebsite/main/darkian.png" alt="Darkian Linux" style="height: 28px; width: 28px;">
-                    <span>Darkian Linux</span>
-                </a>
-                <p>A Linux distribution for gamers and penetration testers. Based on Debian 13 Trixie.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Project</h4>
-                <ul>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#specs">Specs</a></li>
-                    <li><a href="#download">Download</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Community</h4>
-                <ul>
-                    <li><a href="https://github.com/Darkian-Linux" target="_blank" rel="noopener">GitHub</a></li>
-                    <li><a href="https://ko-fi.com/piponidlo" target="_blank" rel="noopener">Support</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Resources</h4>
-                <ul>
-                    <li><a href="https://www.debian.org/" target="_blank" rel="noopener">Debian</a></li>
-                    <li><a href="https://kde.org/" target="_blank" rel="noopener">KDE Plasma</a></li>
-                    <li><a href="https://calamares.io/" target="_blank" rel="noopener">Calamares</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <span>&copy; 2026 Darkian Linux. Free &amp; Open Source.</span>
-            <span>Built with 🐍 and ❤️</span>
-        </div>
-    </footer>
+    function toggleMobile() { document.getElementById('mobileMenu').classList.toggle('open'); }
+    function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); }
+
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
 
 </body>
 </html>
