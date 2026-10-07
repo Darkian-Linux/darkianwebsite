@@ -65,35 +65,37 @@ export default function CreditsPage() {
       <div className="mt-8 flex flex-col gap-3">
         {TEAM.map((member, index) => (
           <Reveal key={member.name} delay={index * 0.08}>
-            <Card className="flex items-center gap-4 p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-red-600/40 sm:p-5">
-              <Image
-                src={member.avatar}
-                alt={member.name}
-                width={48}
-                height={48}
-                className="size-12 shrink-0 rounded-full bg-muted object-cover"
-              />
-              <div className="min-w-0 flex-1">
-                <div className="text-sm font-semibold sm:text-base">
-                  {member.name}
+            <Card className="p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-red-600/40 sm:p-5">
+              <div className="flex items-center gap-4">
+                <Image
+                  src={member.avatar}
+                  alt={member.name}
+                  width={48}
+                  height={48}
+                  className="size-12 shrink-0 rounded-full bg-muted object-cover"
+                />
+                <div className="min-w-0 flex-1">
+                  <div className="text-sm font-semibold sm:text-base">
+                    {member.name}
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    {member.role}
+                  </div>
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  {member.role}
+                <div className="flex shrink-0 gap-2">
+                  {member.links.map(({ label, href, Icon }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={label}
+                      className="flex size-9 items-center justify-center rounded-lg border border-border text-muted-foreground transition-colors hover:border-red-600/40 hover:text-foreground"
+                    >
+                      <Icon className="size-4" />
+                    </a>
+                  ))}
                 </div>
-              </div>
-              <div className="flex shrink-0 gap-2">
-                {member.links.map(({ label, href, Icon }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={label}
-                    className="flex size-9 items-center justify-center rounded-lg border border-border text-muted-foreground transition-colors hover:border-red-600/40 hover:text-foreground"
-                  >
-                    <Icon className="size-4" />
-                  </a>
-                ))}
               </div>
             </Card>
           </Reveal>
