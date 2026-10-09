@@ -6,7 +6,6 @@ import {
   Download,
   EyeOff,
   Gamepad2,
-  HardDrive,
   MessageCircle,
   Monitor,
 } from "lucide-react";
@@ -33,11 +32,6 @@ const FEATURES = [
     Icon: Monitor,
     title: "KDE Plasma 6",
     text: "A fast, customizable desktop that stays out of your way while you play.",
-  },
-  {
-    Icon: HardDrive,
-    title: "Calamares installer",
-    text: "Graphical installer with dual-boot and auto-partition. Up and running in minutes.",
   },
   {
     Icon: Boxes,
@@ -69,7 +63,7 @@ const SPEC_TABLE = [
   { key: "Based on", value: "Debian 13 Trixie", accent: false },
   { key: "Desktop", value: "KDE Plasma 6", accent: false },
   { key: "Installer", value: "Calamares", accent: false },
-  { key: "Architecture", value: "amd64", accent: false },
+  { key: "Architecture", value: "amd64, soon arm64", accent: false },
 ] as const;
 
 function SectionHeading({
@@ -138,17 +132,17 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ---- Specs ---- */}
+      {/* ---- Details ---- */}
       <section
-        id="specs"
+        id="details"
         className="mx-auto w-full max-w-6xl scroll-mt-20 px-4 py-16 sm:px-6 sm:py-20"
       >
         <Reveal>
           <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
             <div>
               <SectionHeading
-                eyebrow="Specs"
-                title="The details"
+                eyebrow="Details"
+                title="What's inside"
                 description="Purpose-built for gaming on top of a Debian stable base."
               />
               <ul className="mt-6 flex flex-col gap-3">

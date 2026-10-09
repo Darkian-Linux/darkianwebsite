@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, Building2, MessageCircle } from "lucide-react";
+import { ArrowLeft, Building2, Mail, MessageCircle } from "lucide-react";
 
 import { GithubIcon } from "@/components/icons/github";
 
@@ -24,6 +24,11 @@ const TEAM = [
         label: "Discord",
         href: "https://discord.com/users/piponidlo",
         Icon: MessageCircle,
+      },
+      {
+        label: "Email",
+        href: "mailto:lordpipon@gmail.com",
+        Icon: Mail,
       },
     ],
   },
@@ -101,6 +106,19 @@ export default function CreditsPage() {
           </Reveal>
         ))}
       </div>
+
+      <Reveal className="mt-10 text-center">
+        <p className="text-sm text-muted-foreground">
+          Questions or want to get involved? Email{" "}
+          <a
+            href="mailto:lordpipon@gmail.com"
+            className="font-medium text-foreground underline underline-offset-4 transition-colors hover:text-red-600"
+          >
+            lordpipon@gmail.com
+          </a>
+          .
+        </p>
+      </Reveal>
     </div>
   );
 }

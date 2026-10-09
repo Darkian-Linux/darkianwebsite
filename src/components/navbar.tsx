@@ -7,12 +7,15 @@ import {
   Layers,
   Menu,
   MessageCircle,
+  ScrollText,
+  ShieldCheck,
   Terminal,
   Users,
 } from "lucide-react";
 
 import { GithubIcon } from "@/components/icons/github";
 
+import { HashLink } from "@/components/hash-link";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -28,9 +31,10 @@ import { LINKS } from "@/lib/site";
 
 const NAV_LINKS = [
   { href: "/#features", label: "Features", Icon: Layers },
-  { href: "/#specs", label: "Specs", Icon: Terminal },
-  { href: "/#download", label: "Download", Icon: Download },
+  { href: "/#details", label: "Details", Icon: Terminal },
   { href: "/credits", label: "Credits", Icon: Users },
+  { href: "/privacy", label: "Privacy", Icon: ShieldCheck },
+  { href: "/terms", label: "Terms", Icon: ScrollText },
 ] as const;
 
 function Logo() {
@@ -58,16 +62,16 @@ export function Navbar() {
       <div className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
         <div className="flex items-center gap-6">
           <Logo />
-          <nav className="hidden items-center gap-1 md:flex">
+          <nav className="hidden items-center gap-1 lg:flex">
             {NAV_LINKS.map(({ href, label, Icon }) => (
-              <Link
+              <HashLink
                 key={href}
                 href={href}
                 className="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
               >
                 <Icon className="size-3.5" />
                 {label}
-              </Link>
+              </HashLink>
             ))}
           </nav>
         </div>
@@ -89,10 +93,10 @@ export function Navbar() {
             size="sm"
             className="hidden rounded-full bg-red-600 text-white hover:bg-red-700 sm:inline-flex"
           >
-            <Link href="/#download">
+            <HashLink href="/#download">
               <Download />
               Download
-            </Link>
+            </HashLink>
           </Button>
 
           <ThemeToggle />
@@ -102,7 +106,7 @@ export function Navbar() {
               <Button
                 variant="outline"
                 size="icon"
-                className="md:hidden"
+                className="lg:hidden"
                 aria-label="Open menu"
               >
                 <Menu />
@@ -120,13 +124,13 @@ export function Navbar() {
               <nav className="flex flex-1 flex-col gap-1 px-4">
                 {NAV_LINKS.map(({ href, label, Icon }) => (
                   <SheetClose asChild key={href}>
-                    <Link
+                    <HashLink
                       href={href}
                       className="flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                     >
                       <Icon className="size-4" />
                       {label}
-                    </Link>
+                    </HashLink>
                   </SheetClose>
                 ))}
               </nav>
@@ -136,10 +140,10 @@ export function Navbar() {
                   asChild
                   className="bg-red-600 text-white hover:bg-red-700"
                 >
-                  <Link href="/#download">
+                  <HashLink href="/#download">
                     <Download />
                     Download Darkian
-                  </Link>
+                  </HashLink>
                 </Button>
                 <Button asChild variant="outline">
                   <a

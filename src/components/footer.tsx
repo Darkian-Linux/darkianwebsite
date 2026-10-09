@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 
 import { GithubIcon } from "@/components/icons/github";
+import { HashLink } from "@/components/hash-link";
 
 import { LINKS } from "@/lib/site";
 
@@ -16,9 +17,11 @@ const COLUMNS = [
     title: "Project",
     links: [
       { label: "Features", href: "/#features" },
-      { label: "Specs", href: "/#specs" },
+      { label: "Details", href: "/#details" },
       { label: "Download", href: "/#download" },
       { label: "Credits", href: "/credits" },
+      { label: "Privacy Policy", href: "/privacy" },
+      { label: "Terms of Service", href: "/terms" },
     ],
   },
   {
@@ -86,12 +89,12 @@ export function Footer() {
                   return (
                     <li key={link.label + link.href}>
                       {link.href.startsWith("/") ? (
-                        <Link
+                        <HashLink
                           href={link.href}
                           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
                         >
                           {content}
-                        </Link>
+                        </HashLink>
                       ) : (
                         <a
                           href={link.href}
@@ -112,7 +115,6 @@ export function Footer() {
 
         <div className="mt-10 flex flex-col gap-2 border-t border-border/70 pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <span>&copy; 2026 Darkian Linux</span>
-          <span>Debian 13 Trixie &middot; KDE Plasma 6 &middot; amd64</span>
         </div>
       </div>
     </footer>
