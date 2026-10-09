@@ -298,6 +298,17 @@ export default function Page() {
               <span>Debian 13 Trixie</span>
             </div>
           </Card>
+
+          <div className="mx-auto mt-4 max-w-2xl rounded-lg border border-dashed border-border bg-muted/40 px-4 py-3 text-center text-sm text-muted-foreground">
+            Live system credentials &mdash; user:{" "}
+            <code className="rounded bg-background px-1.5 py-0.5 font-mono text-xs font-semibold text-foreground">
+              darkian
+            </code>{" "}
+            &middot; password:{" "}
+            <code className="rounded bg-background px-1.5 py-0.5 font-mono text-xs font-semibold text-foreground">
+              darkianlinux
+            </code>
+          </div>
         </Reveal>
       </section>
 
