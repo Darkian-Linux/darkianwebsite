@@ -306,7 +306,7 @@ export default function Page() {
             </code>{" "}
             &middot; password:{" "}
             <code className="rounded bg-background px-1.5 py-0.5 font-mono text-xs font-semibold text-foreground">
-              darkianlinux
+              live
             </code>
           </div>
         </Reveal>
