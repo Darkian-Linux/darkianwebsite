@@ -67,9 +67,8 @@ export function Hero() {
         {...item(0.16)}
         className="mt-5 max-w-xl text-balance text-base leading-relaxed text-muted-foreground sm:text-lg"
       >
-        KDE Plasma, a Calamares installer and a full gaming stack — Steam and
-        Proton ready out of the box. Built on Debian stable. No telemetry, no
-        tracking.
+        KDE Plasma, a Calamares installer and a full gaming stack ready out of
+        the box. Built on Debian stable. No telemetry, no tracking.
       </motion.p>
 
       {/* Buttons */}

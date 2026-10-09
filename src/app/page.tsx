@@ -27,7 +27,7 @@ const FEATURES = [
   {
     Icon: Gamepad2,
     title: "Gaming out of the box",
-    text: "Steam and Proton pre-installed with GPU drivers configured. Install, boot, play — no setup marathons.",
+    text: "GPU drivers configured and ready to go. Install, boot, play — no setup marathons.",
   },
   {
     Icon: Monitor,
