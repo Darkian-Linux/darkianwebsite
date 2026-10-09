@@ -64,8 +64,7 @@ export function Footer() {
               Darkian Linux
             </Link>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">
-              A Linux distro for true gamers. Based on Debian 13 Trixie with
-              KDE Plasma 6.
+              A Linux distro for true gamers.
             </p>
           </div>
 

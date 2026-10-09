@@ -60,7 +60,6 @@ const SPEC_LIST = [
   "Based on Debian 13 Trixie",
   "KDE Plasma 6 desktop",
   "Calamares graphical installer",
-  "Steam + Proton pre-installed",
   "GPU drivers configured",
   "100% free, no telemetry",
 ] as const;

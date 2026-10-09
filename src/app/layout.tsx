@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://darkian.xyz"),
   title: {
-    default: "Darkian Linux — A Linux distro for true gamers",
+    default: "Darkian Linux",
     template: "%s — Darkian Linux",
   },
   description:

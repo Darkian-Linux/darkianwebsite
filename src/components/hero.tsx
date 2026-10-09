@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { Download, MessageCircle } from "lucide-react";
 
@@ -50,18 +49,6 @@ export function Hero() {
         />
         <div className="hero-grid absolute inset-0" />
       </div>
-
-      {/* Badge */}
-      <motion.span
-        {...item(0)}
-        className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-background/60 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur"
-      >
-        <span className="relative flex size-2">
-          <span className="absolute inline-flex size-full animate-ping rounded-full bg-red-600 opacity-75" />
-          <span className="relative inline-flex size-2 rounded-full bg-red-600" />
-        </span>
-        Darkian 13 Snake &middot; Debian 13 Trixie
-      </motion.span>
 
       {/* Headline */}
       <motion.h1
@@ -122,21 +109,6 @@ export function Hero() {
             Discord
           </a>
         </Button>
-      </motion.div>
-
-      {/* Logo */}
-      <motion.div
-        {...item(0.34)}
-        className="mt-12 flex items-center gap-2 text-xs text-muted-foreground/70"
-      >
-        <Image
-          src="/darkian.png"
-          alt="Darkian Linux logo"
-          width={20}
-          height={20}
-          className="rounded opacity-80"
-        />
-        Free &middot; Open &middot; Yours
       </motion.div>
     </section>
   );
