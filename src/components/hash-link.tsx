@@ -27,7 +27,11 @@ export function HashLink({ href, onClick, ...props }: HashLinkProps) {
     document
       .getElementById(id)
       ?.scrollIntoView({ behavior: "smooth", block: "start" });
-    window.history.replaceState(null, "", targetPath);
+    window.history.replaceState(
+      null,
+      "",
+      window.location.pathname + window.location.search
+    );
   }
 
   return <Link href={href} onClick={handleClick} {...props} />;

@@ -67,8 +67,9 @@ export function Hero() {
         {...item(0.16)}
         className="mt-5 max-w-xl text-balance text-base leading-relaxed text-muted-foreground sm:text-lg"
       >
-        KDE Plasma, a Calamares installer and a full gaming stack ready out of
-        the box. Built on Debian stable. No telemetry, no tracking.
+        Boots into KDE Plasma, then Calamares lets you pick your desktop —
+        MATE, Cinnamon, KDE, GNOME, Xfce or LXQt. A full gaming stack, ready out
+        of the box. Built on Debian stable. No telemetry, no tracking.
       </motion.p>
 
       {/* Buttons */}

@@ -30,8 +30,8 @@ const FEATURES = [
   },
   {
     Icon: Monitor,
-    title: "KDE Plasma 6",
-    text: "A fast, customizable desktop that stays out of your way while you play.",
+    title: "Your desktop, your way",
+    text: "The live system runs KDE Plasma — pick MATE, Cinnamon, KDE, GNOME, Xfce, or LXQt during installation.",
   },
   {
     Icon: Boxes,
@@ -52,7 +52,8 @@ const FEATURES = [
 
 const SPEC_LIST = [
   "Based on Debian 13 Trixie",
-  "KDE Plasma 6 desktop",
+  "KDE Plasma 6 on the live system",
+  "Pick your desktop: MATE, Cinnamon, KDE, GNOME, Xfce, LXQt",
   "Calamares graphical installer",
   "GPU drivers configured",
   "100% free, no telemetry",
@@ -61,7 +62,7 @@ const SPEC_LIST = [
 const SPEC_TABLE = [
   { key: "Codename", value: "Darkian 13 Snake", accent: true },
   { key: "Based on", value: "Debian 13 Trixie", accent: false },
-  { key: "Desktop", value: "KDE Plasma 6", accent: false },
+  { key: "Desktop", value: "KDE Plasma 6 live — your pick at install", accent: false },
   { key: "Installer", value: "Calamares", accent: false },
   { key: "Architecture", value: "amd64, soon arm64", accent: false },
 ] as const;
@@ -285,7 +286,7 @@ export default function Page() {
             </div>
 
             <div className="mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
-              <span>amd64</span>
+              <span>amd64, soon arm64</span>
               <span>&middot;</span>
               <span>Free</span>
               <span>&middot;</span>

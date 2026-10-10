@@ -24,12 +24,12 @@ export const metadata: Metadata = {
     template: "%s — Darkian Linux",
   },
   description:
-    "Darkian Linux is a Debian 13 Trixie based Linux distro for gamers. KDE Plasma 6, Calamares installer. No telemetry, no tracking.",
+    "Darkian Linux is a Debian 13 Trixie based Linux distro for gamers. Boots into KDE Plasma, with MATE, Cinnamon, KDE, GNOME, Xfce or LXQt to choose from at install. No telemetry, no tracking.",
   icons: { icon: "/darkian.png" },
   openGraph: {
     title: "Darkian Linux — A Linux distro for true gamers",
     description:
-      "A Debian 13 Trixie based distro for gamers. KDE Plasma 6, no telemetry.",
+      "A Debian 13 Trixie based distro for gamers. KDE Plasma live, your choice of desktop at install, no telemetry.",
     url: "https://darkian.xyz",
     siteName: "Darkian Linux",
     locale: "en_US",
