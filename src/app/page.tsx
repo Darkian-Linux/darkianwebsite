@@ -291,6 +291,8 @@ export default function Page() {
               <span>Free</span>
               <span>&middot;</span>
               <span>Debian 13 Trixie</span>
+              <span>&middot;</span>
+              <span>DE chooser: MATE, Cinnamon, KDE, GNOME, Xfce, LXQt</span>
             </div>
           </Card>
 
